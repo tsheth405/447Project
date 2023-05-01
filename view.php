@@ -1,43 +1,29 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Flight Information</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            .flight-box {
-                border: 1px solid black;
-                padding: 10px;
-                margin-bottom: 10px;
-            }
-            table {
-                border-collapse: collapse;
-                width: 100%;
-            }
-            th, td {
-                text-align: left;
-                padding: 8px;
-            }
-            tr:nth-child(even){background-color: #f2f2f2}
-            th {
-                background-color: #4CAF50;
-                color: white;
-            }
-        </style>
-    </head>
-    <h1>
-        FlyOn
-    </h1>
-    <body>
-        <div><h2>Flight Information</h2></div>
-        <?php
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "test";
 
-        ?>
-    </body>
-</html>
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Send SQL query
+$query = 'SELECT Arrival_Time, Departure_Time, Flight_Number, Departure_Airport, Arrival_Airport FROM flights';
+$result = mysqli_query($conn, $query) or die('Query failed: ' . mysqli_error($conn));
+
+// Print results in HTML
+echo "<table>\n";
+while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+    echo "\t<tr>\n";
+    foreach ($line as $col_value) {
+        echo "\t\t<td>$col_value</td>\n";
+    }
+    echo "\t</tr>\n";
+}
+echo "</table>\n";
+
+// Free resultset
+mysqli_free_result($result);
+
+// Close connection
+mysqli_close($conn);
+?>

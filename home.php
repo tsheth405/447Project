@@ -14,13 +14,11 @@
     h1, h2 {
       text-align: center;
     }
-
     form {
       display: flex;
       justify-content: center;
       margin-top: 50px;
     }
-
     input[type=submit] {
       background-color: #4CAF50;
       color: white;
@@ -30,9 +28,19 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     input[type=submit]:hover {
       background-color: #45a049;
+    }
+    
+    /* New styles for welcome message */
+    .welcome {
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -44,5 +52,12 @@
   <form action="book.php" method="GET">
     <input type="submit" name="book" value="Book a Flight" />
   </form>
+   
+  <?php
+  session_start();
+  if(isset($_SESSION['username'])) {
+    echo '<div class="welcome">Hello, ' . ucwords(strtolower($_SESSION['username'])) . '. Welcome to FlyOn.</div>';
+  }
+  ?>
 </body>
 </html>

@@ -14,7 +14,6 @@
 			font-family: 'Open Sans', sans-serif;
 			font-size: 1rem;
 		}
-
 		h1 {
 			margin-top: 2rem;
 			margin-bottom: 2rem;
@@ -23,7 +22,6 @@
 			text-align: center;
 			color: #3a3f44;
 		}
-
 		.form-container {
 			max-width: 500px;
 			margin: 0 auto;
@@ -32,12 +30,10 @@
 			border-radius: 10px;
 			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 		}
-
 		label {
 			font-weight: bold;
 			color: #3a3f44;
 		}
-
 		input[type="text"],
 		input[type="password"] {
 			border-radius: 5px;
@@ -46,7 +42,6 @@
 			border: none;
 			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 		}
-
 		input[type="button"] {
 			border: none;
 			border-radius: 5px;
@@ -56,11 +51,9 @@
 			cursor: pointer;
 			transition: all 0.3s ease-in-out;
 		}
-
 		input[type="button"]:hover {
 			background-color: #575f6b;
 		}
-
 		input[type="button"]:focus {
 			outline: none;
 		}
@@ -73,14 +66,19 @@
 	<main>
 		<div class="form-container">
 			<h2>Login</h2>
-			<form action="connect.php" method="POST">
+            <form action="aunthenticate.php" method="POST" id="login-form">
 				<label for="username">User Name:</label> <br>
-				<input type="text" name="username" id="name" required/><br>
+				<input type="text" name="username" id="username" required/><br>
 				<label for="password">Password:</label> <br>
 				<input type="password" name="password" id="password" required/><br>
-				<input type="button" name="login" id="login" value="Log In"/><br><br>
-				<input type="button" name="Create Account" id="create" value="Create Account" onclick="window.location.href='createAccount.php'"/>
-			</form>
+                <input type="button" name="login" id="login" value="Log In" onclick="submitLoginForm()"/><br><br>
+            </form>
+            <script>
+                function submitLoginForm(){
+                    document.getElementById('login-form').submit();
+                }
+            </script>
+			<input type="button" name="Create Account" id="create" value="Create Account" onclick="window.location.href='createAccount.php'"/>
 		</div>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

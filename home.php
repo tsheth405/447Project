@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>FlyOn - Flight Booking System</title>
+  <title>FlyOn</title>
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -38,7 +38,6 @@
 </head>
 <body>
   <h1>FlyOn</h1>
-  <h2>Flight Booking System</h2>
   <form action="view.php" method="GET">
     <input type="submit" name="view" value="View Flight Information" />
   </form>

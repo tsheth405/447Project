@@ -13,7 +13,7 @@
         }
         
         h1 {
-            background-color: #4CAF50;
+            background-color: #3a3f44;
             color: white;
             padding: 20px;
             margin-bottom: 20px;
@@ -45,7 +45,7 @@
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #3a3f44;
             color: white;
             padding: 8px 16px;
             font-size: 14px;
@@ -54,7 +54,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #3a3f44;
         }
 
         .container {

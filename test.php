@@ -78,7 +78,7 @@
 				<input type="text" name="username" id="name" required/><br>
 				<label for="password">Password:</label> <br>
 				<input type="password" name="password" id="password" required/><br>
-				<input type="button" name="login" id="login" value="Log In"/><br><br>
+				<input type="button" name="login" id="login" value="Log In" onclick="window.location.href='home.php'"/><br><br>
 				<input type="button" name="Create Account" id="create" value="Create Account" onclick="window.location.href='createAccount.php'"/>
 			</form>
 		</div>

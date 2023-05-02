@@ -1,83 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Flight Information</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-		th, td {
-			text-align: left;
-			padding: 8px;
-			border-bottom: 1px solid #ddd;
-		}
-		tr:hover {background-color:#f5f5f5;}
-		th {
-			background-color: #4CAF50;
-			color: white;
-		}
-	</style>
-</head>
-<body>
+<?php
+session_start(); // start the session
 
-<h2>Flight Information</h2>
+echo '<button style="position: absolute; top: 10px; right: 10px;" onclick="location.href=\'home.php\'">HOME</button>';
+echo '<button style="position: absolute; top: 40px; right: 10px; class="logout" onclick="location.href=\'logout.php\'">Log out</button>';
 
-<table>
-	<tr>
-		<th>Flight Number</th>
-		<th>Arrival Terminal</th>
-		<th>Departure Terminal</th>
-		<th>Arrival Gate</th>
-		<th>Departure Gate</th>
-		<th>Status</th>
-		<th>Pilot Name</th>
-		<th>Aircraft Type</th>
-	</tr>
 
-	<?php
-		// Connect to the database
-		$servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "test";
-		$conn = new mysqli($servername, $username, $password, $dbname);
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "test";
 
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-		// Home button
-		echo '<button style="position: absolute; top: 10px; right: 10px;" onclick="location.href=\'home.php\'">HOME</button>';
+if (isset($_SESSION['username']) && isset($_POST['flight_number'])) {
+    $name = $_SESSION['username'];
+    $flight_number = $_POST['flight_number'];
+    
+    //title
+    echo '<h1 style="font-size: 50px; margin-top: 100px; text-align: center;">Confirmation</h1>';
 
-		// Retrieve the flight information for the specified flight number
-		$flight_number = $_GET["flight_number"];
-		$sql = "SELECT * FROM Flight_Info WHERE Flight_Number = '$flight_number'";
-		$result = $conn->query($sql);
+    // Database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "test";
 
-		// Display the information in a table
-		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				echo "<tr>";
-				echo "<td>" . $row["Flight_Number"] . "</td>";
-				echo "<td>" . $row["Arrival_Terminal"] . "</td>";
-				echo "<td>" . $row["Departure_Terminal"] . "</td>";
-				echo "<td>" . $row["Arrival_Gate"] . "</td>";
-				echo "<td>" . $row["Departure_Gate"] . "</td>";
-				echo "<td>" . $row["Status"] . "</td>";
-				echo "<td>" . $row["Pilot_Name"] . "</td>";
-				echo "<td>" . $row["Aircraft_Type"] . "</td>";
-				echo "</tr>";
-			}
-		} else {
-			echo "You have no upcoming flights!";
-		}
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-		$conn->close();
-	?>
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-</table>
+    // Get the user_id associated with the given username
+    $sql = "SELECT id FROM userinfo WHERE username = '$name'";
+    $result = mysqli_query($conn, $sql);
 
-</body>
-</html>
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $user_id = $row['id'];
+    } else {
+    echo "Error: user not found";
+    exit;
+    }
+
+    // Check if the user has already booked the selected flight
+    $sql = "SELECT * FROM Trips WHERE Flight_Number = '$flight_number' AND User_ID = '$user_id'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        echo '<p style="font-size: 24px; text-align: center;">Flight '.$flight_number.' has already been booked!</p>';
+    } else {
+        $seat_number = rand(1, 50);
+        $boarding_pass = rand(1, 50)*1234;
+        $sql = "INSERT INTO `Trips` (`BoardingPass_Number`, `Flight_Number`, `Seat_Number`, `User_ID`, `username`) 
+        VALUES ('$boarding_pass','$flight_number', '$seat_number', '$user_id', '$name')";
+        $query = mysqli_query($conn, $sql);
+        echo '<h2 style="font-size: 30px; margin-top: 50px; text-align: center;">Flight ' . $flight_number . ' has been booked</h2>';
+    }
+    
+    // Close the database connection
+    $conn->close();
+}
+
+?>

@@ -10,7 +10,8 @@
 		crossorigin="anonymous">
 	<style>
 		body {
-			background-color: #f8f9fa;
+			background: url("https://images.unsplash.com/photo-1566566220367-af8d77269124?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFpcnBvcnR8ZW58MHx8MHx8&w=1000&q=80");
+			background-size: cover;
 			font-family: 'Open Sans', sans-serif;
 			font-size: 1rem;
 		}
@@ -66,7 +67,7 @@
 	<main>
 		<div class="form-container">
 			<h2>Login</h2>
-            <form action="aunthenticate.php" method="POST" id="login-form">
+            <form action="authenticate.php" method="POST" id="login-form">
 				<label for="username">User Name:</label> <br>
 				<input type="text" name="username" id="username" required/><br>
 				<label for="password">Password:</label> <br>

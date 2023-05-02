@@ -84,29 +84,28 @@
         $departure_location = $_POST['departure_location'];
         $arrival_location = $_POST['arrival_location'];
         $departure_date = $_POST['departure_date'];
-        $departure_time = $_POST['departure_time'];
 
         // Query to search for the flights based on the search parameters
-        $sql = "SELECT * FROM flights WHERE (flight_number = ? OR ? = '') AND (origin = ? OR ? = '') AND (destination = ? OR ? = '') AND (DATE(departure_time) = ? OR ? = '0000-00-00') AND (TIME(departure_time) >= ? OR ? = '00:00')";
+        $sql = "SELECT * FROM flights WHERE (Flight_Number = ? OR ? = '') AND (Departure_Airport = ? OR ? = '') AND (Arrival_Airport = ? OR ? = '') AND (DATE(Departure_Time) = ? OR ? = '0000-00-00' OR ? = '')";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssssss", $flight_number, $flight_number, $departure_location, $departure_location, $arrival_location, $arrival_location, $departure_date, $departure_date, $departure_time, $departure_time);
+        $stmt->bind_param("sssssssss", $flight_number, $flight_number, $departure_location, $departure_location, $arrival_location, $arrival_location, $departure_date, $departure_date, $departure_date);
         $stmt->execute();
         $result = $stmt->get_result();
 
+
         // Display search results
         echo "<table>";
-        echo "<tr><th>Flight Number</th><th>Departure</th><th>Arrival</th><th>Departure Time</th><th>Flight Time</th><th>Plane Type</th><th>Action</th></tr>";
+        echo "<tr><th>Flight Number</th><th>Departure Airport</th><th>Arrival Airport</th><th>Departure Time</th><th>Arrival Time</th></tr>";
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $row['flight_number'] . "</td>";
-            echo "<td>" . $row['origin'] . "</td>";
-            echo "<td>" . $row['destination'] . "</td>";
-            echo "<td>" . $row['departure_time'] . "</td>";
-            echo "<td>" . $row['flight_time'] . "</td>";
-            echo "<td>" . $row['plane_type'] . "</td>";
+            echo "<td>" . $row['Flight_Number'] . "</td>";
+            echo "<td>" . $row['Departure_Airport'] . "</td>";
+            echo "<td>" . $row['Arrival_Airport'] . "</td>";
+            echo "<td>" . $row['Departure_Time'] . "</td>";
+            echo "<td>" . $row['Arrival_Time'] . "</td>";
             echo "<td>";
             echo "<form action='book_flight.php' method='post'>";
-            echo "<input type='hidden' name='flight_id' value='" . $row['flight_id'] . "'>";
+            echo "<input type='hidden' name='flight_number' value='" . $row['Flight_Number'] . "'>";
             echo "<button type='submit'>Book Flight</button>";
             echo "</form>";
             echo "</td>";
@@ -116,5 +115,6 @@
         ?>
     </div>
 </body>
+
 </html>
 

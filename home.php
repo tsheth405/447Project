@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1566566220367-af8d77269124?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFpcnBvcnR8ZW58MHx8MHx8&w=1000&q=80') no-repeat center center fixed;
       background-size: cover;
       position: relative;
       min-height: 100vh;
@@ -28,7 +28,7 @@
     }
     
     .button {
-      background-color: #4CAF50;
+      background-color: #3a3f44;
       color: white;
       font-size: 18px;
       padding: 14px 24px;
@@ -39,9 +39,15 @@
     }
     
     .button:hover {
-      background-color: #45a049;
+      background-color: #3a3f44;
     }
-    
+
+    .button[name="book"] {
+      background-color: #3a3f44;
+    }
+    .button[name="view"] {
+      background-color: #3a3f44;
+    }
     /* New styles for welcome message */
     .welcome {
         position: absolute;
@@ -59,7 +65,7 @@
       position: absolute;
       bottom: 50px;
       right: 20px;
-      background-color: #4CAF50;
+      background-color: #3a3f44;
       color: white;
       font-size: 16px;
       padding: 12px 20px;
@@ -69,7 +75,7 @@
     }
     
     .logout:hover {
-      background-color: #45a049;
+      background-color: #3a3f44;
     }
   </style>
 </head>
@@ -78,7 +84,7 @@
   
   <div class="buttons">
     <form action="view.php" method="GET">
-      <input class="button" type="submit" name="view" value="View Flight Information" />
+      <input class="button" type="submit" name="view" value="View Your Upcoming Flights" />
     </form>
     <form action="search_flight.html" method="GET">
       <input class="button" type="submit" name="book" value="Book a Flight" />

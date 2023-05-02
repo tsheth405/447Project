@@ -2,11 +2,18 @@
 // book_flight.php
 session_start();
 
-if (isset($_SESSION['user_id']) && isset($_POST['flight_id'])) {
-    $user_id = $_SESSION['user_id'];
-    $flight_id = $_POST['flight_id'];
+//$_SESSION['username'] = 'bob';
+
+if (isset($_SESSION['username']) && isset($_POST['flight_number'])) {
+    $user_id = $_SESSION['username'];
+    $flight_number = $_POST['flight_number'];
 
     // Database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "test";
+
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection
@@ -14,13 +21,30 @@ if (isset($_SESSION['user_id']) && isset($_POST['flight_id'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Insert booking
-    $stmt = $conn->prepare("INSERT INTO bookings (user_id, flight_id) VALUES (?, ?)");
-    $stmt->bind_param("ii", $user_id, $flight_id);
+    // Check if the user has already booked this flight
+    $stmt = $conn->prepare("SELECT * FROM Trips WHERE User_ID = ? AND Flight_Number = ?");
+    $stmt->bind_param("ss", $user_id, $flight_number);
     $stmt->execute();
-    $stmt->close();
+    $result = $stmt->get_result();
 
-    // Redirect to a confirmation page or display a success message
+    if ($result->num_rows > 0) {
+        // If the user has already booked this flight, display an error message
+        echo "<script>alert('You have already booked this flight.');</script>";
+    } else {
+        // Insert the trip into the trips table
+        $seat_number = rand(1, 50);
+
+        $stmt = $conn->prepare("INSERT INTO Trips (Flight_Number, User_ID, Seat_Number) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $flight_number, $user_id, $seat_number);
+        $stmt->execute();
+        $stmt->close();
+
+        // Display a success message
+        echo "<script>alert('Your trip has been booked.');</script>";
+    }
+
+    // Close the database connection
+    $conn->close();
 } else {
     // Redirect to login or show an error message
 }

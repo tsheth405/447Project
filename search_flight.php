@@ -101,8 +101,8 @@
             echo "<td>" . $row['Flight_Number'] . "</td>";
             echo "<td>" . $row['Departure_Airport'] . "</td>";
             echo "<td>" . $row['Arrival_Airport'] . "</td>";
-            echo "<td>" . $row['Departure_Time'] . "</td>";
-            echo "<td>" . $row['Arrival_Time'] . "</td>";
+            echo "<td>" . substr($row['Departure_Time'], 0, 16) . "</td>";
+            echo "<td>" . substr($row['Arrival_Time'], 0, 16) . "</td>";
             echo "<td>";
             echo "<form action='book_flight.php' method='post'>";
             echo "<input type='hidden' name='flight_number' value='" . $row['Flight_Number'] . "'>";
@@ -115,6 +115,4 @@
         ?>
     </div>
 </body>
-
 </html>
-

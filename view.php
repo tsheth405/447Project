@@ -1,3 +1,13 @@
+<head>
+  <style>
+    body {
+        background: url('https://images.unsplash.com/photo-1566566220367-af8d77269124?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFpcnBvcnR8ZW58MHx8MHx8&w=1000&q=80') no-repeat center center fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+
 <?php
 session_start(); // start the session
 
@@ -30,12 +40,11 @@ $result = mysqli_query($conn, $sql) or die('Query failed: ' . mysqli_error($conn
 
 // Print results in HTML
 while ($line = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-    echo "<div style='border: 5px solid black; padding: 10px; margin-bottom: 10px;'>\n";
+    echo "<div style='border: 5px solid black; padding: 10px; margin-bottom: 10px; background-color: white;'>\n";
     echo "<div style='display:flex;justify-content:flex-start;'>\n";
     echo "<h2 style='font-size:40px; margin-right: 150px;'>".$line['Flight_Number']."</h2>\n";
     echo "<div>\n";
     echo "<div style='font-size:30px; margin-right: 200px;''><b>Departure</b></div>\n";
-    //echo "<div style='font-size:20px;'><b>Time: </b>".date('g:i a', strtotime($line['Departure_Time']))."</div>\n";
     echo "<div style='font-size:20px;'><b>Time: </b>".date('F j, Y g:i a', strtotime($line['Departure_Time']))."</div>\n";
     echo "<div style='font-size:20px;'><b>Airport: </b>".$line['Departure_Airport']."</div>\n";
     echo "</div>\n";

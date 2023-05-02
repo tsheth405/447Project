@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <h1>Your Flight Has Been Cancelled</h1>
+        <?php echo '<button style="position: absolute; top: 10px; right: 10px;" onclick="location.href=\'home.php\'">HOME</button>'; ?>
+        <h1>Flight <?php echo $_GET['flight']; ?> has been cancelled</h1>
     </body>
 </html>

@@ -48,8 +48,12 @@
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-		// Retrieve the flight information from the database
-		$sql = "SELECT * FROM Flight_Info";
+		// Home button
+		echo '<button style="position: absolute; top: 10px; right: 10px;" onclick="location.href=\'home.php\'">HOME</button>';
+
+		// Retrieve the flight information for the specified flight number
+		$flight_number = $_GET["flight_number"];
+		$sql = "SELECT * FROM Flight_Info WHERE Flight_Number = '$flight_number'";
 		$result = $conn->query($sql);
 
 		// Display the information in a table
@@ -67,7 +71,7 @@
 				echo "</tr>";
 			}
 		} else {
-			echo "0 results";
+			echo "You have no upcoming flights!";
 		}
 
 		$conn->close();

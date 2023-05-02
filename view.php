@@ -15,6 +15,8 @@ echo '<h1 style="font-size: 50px;">Your Flights</h1>';
 // Home button
 echo '<button style="position: absolute; top: 10px; right: 10px;" onclick="location.href=\'home.php\'">HOME</button>';
 
+echo '<button style="position: absolute; top: 40px; right: 10px; class="logout" onclick="location.href=\'logout.php\'">Log out</button>';
+
 // Get the username from the session
 $username = $_SESSION['username'];
 
@@ -55,5 +57,4 @@ mysqli_free_result($result);
 // Close connection
 mysqli_close($conn);
 ?>
-
 

@@ -8,7 +8,8 @@
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #f2f2f2;
+      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center center fixed;
+      background-size: cover;
       position: relative;
       min-height: 100vh;
     }
@@ -16,6 +17,8 @@
     h1, h2 {
       text-align: center;
       font-size:48px;
+      color: white;
+      text-shadow: 2px 2px #000000;
     }
     
     .buttons {
@@ -45,9 +48,10 @@
         top: 25px;
         right: 20px;
         padding: 20px;
-        color: black;
+        color: white;
         text-align: center;
         font-size: 24px;
+        text-shadow: 2px 2px #000000;
     }
     
     /* New styles for log out button */

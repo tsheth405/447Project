@@ -66,6 +66,9 @@
     <h1>Flight Search Results</h1>
     <div class="container">
         <?php
+        echo '<button style="position: absolute; top: 100px; right: 10px;" onclick="location.href=\'home.php\'">HOME</button>';
+        echo '<button style="position: absolute; top: 140px; right: 10px; class="logout" onclick="location.href=\'logout.php\'">Log out</button>';
+        
         // Your PHP code for searching flights and displaying results
         // Database connection
         $servername = "localhost";
@@ -104,7 +107,7 @@
             echo "<td>" . substr($row['Departure_Time'], 0, 16) . "</td>";
             echo "<td>" . substr($row['Arrival_Time'], 0, 16) . "</td>";
             echo "<td>";
-            echo "<form action='book_flight.php' method='post'>";
+            echo "<form action='book_flight2.php' method='post'>";
             echo "<input type='hidden' name='flight_number' value='" . $row['Flight_Number'] . "'>";
             echo "<button type='submit'>Book Flight</button>";
             echo "</form>";

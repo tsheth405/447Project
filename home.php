@@ -76,7 +76,7 @@
     <form action="view.php" method="GET">
       <input class="button" type="submit" name="view" value="View Flight Information" />
     </form>
-    <form action="book.php" method="GET">
+    <form action="search_flight.html" method="GET">
       <input class="button" type="submit" name="book" value="Book a Flight" />
     </form>
   </div>

@@ -15,7 +15,8 @@
             $sql = "INSERT INTO `userinfo` (`firstname`, `lastname`, `email`, `phone`, `username`, `password`, `ssn`, `passportid`) VALUES ('$firstname','$lastname', '$email', '$phone', '$username', '$password' , '$ssn', '$passportid')";
             $query = mysqli_query($conn, $sql);
             if($query){
-                echo 'entry successful';
+                header('Location: test.php');
+                exit();
             }
             else {
                 echo 'error occurred';
